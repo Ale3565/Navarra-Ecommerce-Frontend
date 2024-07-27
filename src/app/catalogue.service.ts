@@ -1,12 +1,13 @@
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CatalogueService {
-  public host: string = 'http://localhost:8080';
+  public host: string = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   public getResource(url: string) { 
