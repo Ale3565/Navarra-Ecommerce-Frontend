@@ -1,27 +1,21 @@
 import { CatalogueService } from './../catalogue.service';
 import { CaddyService } from './caddy.service';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService  {
+export class AuthenticationService {
   private users;
-  // = [
-  //   { username: 'admin', password: '1234', roles: ['USER', 'ADMIN'] },
-  //   { username: 'user1', password: '1234', roles: ['USER'] },
-  //   { username: 'user2', password: '1234', roles: ['USER'] },
-  // ];
   public users2;
-  public host: string = 'https://localhost:8443';
   public authenticated: boolean;
   public authenticatedUser;
   public token;
-  constructor(private http: HttpClient, private catService:CatalogueService) {
-    this.users=this.getUsers();
+
+  constructor(private http: HttpClient, private catService: CatalogueService) {
+    this.users = this.getUsers();
   }
- 
 
   login(username: string, password: string) {
     let user;
@@ -70,7 +64,7 @@ export class AuthenticationService  {
     }
   }
 
-  public getUsers(){
+  public getUsers() {
     this.catService.getResource('/users').subscribe(
       (data) => {
         this.users2 = data;
@@ -81,6 +75,7 @@ export class AuthenticationService  {
       }
     );
   }
+
   isAuthenticated() {
     return this.authenticated;
   }

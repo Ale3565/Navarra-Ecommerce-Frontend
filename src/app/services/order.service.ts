@@ -21,12 +21,14 @@ export class OrderService {
   public setClient(client: Client) {
     this.order.client = client;
   }
+
   public loadProductsFromCaddy() {
     this.order.products = [];
     for (let key in this.caddyService.getCaddy().items) {
       this.order.products.push(this.caddyService.getCaddy().items[key]);
     }
   }
+
   public getTotal(): number {
     let total: number = 0;
     this.order.products.forEach((p) => {
