@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+      <div class="col-3"></div>
+<div class="col-md-8" *ngIf="mode==0">
+  <form #f="ngForm" (ngSubmit)="onSaveClient(f.value)">
+    <div class="form-group">
+      <label class="control-label">Nombre:</label>
+      <input type="text" name="name" ngModel class="form-control dark-border" [(ngModel)]="caddyService.getCaddy().client.name">
+    </div>
+    <div class="form-group">
+      <label class="control-label">Dirección:</label>
+      <input type="text" name="address" ngModel class="form-control dark-border" [(ngModel)]="caddyService.getCaddy().client.address">
+      <div class="form-group">
+        <label class="control-label">Numero de telefono:</label>
+        <input type="text" name="phoneNumber" ngModel class="form-control dark-border" [(ngModel)]="caddyService.getCaddy().client.phoneNumber">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Correo electronico:</label>
+        <input type="text" name="email" ngModel class="form-control dark-border" [(ngModel)]="caddyService.getCaddy().client.email">
+      </div>
+      <button type="submit" class="btn btn-primary">Siguiente</button>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+
+
+<div class="container">      
+
+<div class="panel {{panelStyle}}" *ngIf="mode==1">
+  <div class="panel-heading"><b>Resumen de tu Orden</b></div>
+  <br>
+    <br>
+  <br>
+
+  <div class="panel-body">
+    <div class="col-md-5">
+      <div class="form-group">
+        <label>Nombre del cliente :</label>
+        <label>{{orderService.order.client.name}}</label>
+      </div>
+      <div class="form-group">
+        <label>Direccion del cliente :</label>
+        <label>{{orderService.order.client.address}}</label>
+      </div>
+      <div class="form-group">
+        <label>Numero móvil del cliente :</label>
+        <label>{{orderService.order.client.phoneNumber}}</label>
+      </div>
+      <div class="form-group">
+        <label>Correo electronico del cliente :</label>
+        <label>{{orderService.order.client.email}}</label>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <label>ID de orden :</label>
+        <label>{{orderService.order.id}}</label>
+      </div>
+      <div class="form-group">
+        <label>Fecha de orden :</label>
+        <label>{{orderService.order.date}}</label>
+      </div>
+    </div>
+
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered text-center mb-0">
+      <thead class="bg-secondary text-dark">
+      <tr>
+        <th>ID del producto</th>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+      </tr>
+      </thead>
+      <tbody class="align-middle"  > 
+      <tr *ngFor="let p of orderService.order.products">
+        <td class="align-middle">{{p.id}}</td><td class="align-middle">{{p.name}}</td>
+        <td class="align-middle">{{p.quantity|number:'0.2'}}</td>
+        <td class="align-middle">{{p.price|number:'0.2'}}</td>
+      </tr>
+    </tbody>
+      <tr>
+        <td colspan="3">Total:</td>
+        <td>{{orderService.getTotal()|number:'0.2'}}</td>
+      </tr>
+    </table>
+      <br>
+
+    <button class="btn btn-sm btn-primary btn-plus" (click)="onOrder()" *ngIf="!orderService.order.id">Confirmar la orden</button>
+    <button class="btn btn-success" (click)="onPayOrder()" *ngIf="orderService.order.id">Pagar orden</button>
+  </div>
+</div>
+</div>

@@ -1,0 +1,6 @@
+.dark-border {
+    border: 2px solid #393737; /* Borde oscuro */
+    border-radius: 4px; /* Bordes redondeados opcional */
+    padding: 0.5em; /* Padding opcional para mejorar la apariencia */
+  }
+  
